@@ -1,4 +1,4 @@
-#Version of HTML 5 Canvas Game with additional features
+Version of HTML 5 Canvas Game with additional features
 
 
 
