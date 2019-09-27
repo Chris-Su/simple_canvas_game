@@ -31,7 +31,7 @@ monsterImage.src = "images/monster.png";
 
 // Game objects
 var hero = {
-	speed: 256 // movement in pixels per second
+	speed: 500 // movement in pixels per second
 };
 var monster = {};
 var monstersCaught = 0;
@@ -108,23 +108,36 @@ var render = function () {
 
 // The main game loop
 var main = function () {
+
 	var now = Date.now();
 	var delta = now - then;
 
+
 	update(delta / 1000);
 	render();
-
+ 
 	then = now;
 
-	// Request to do this again ASAP
-	requestAnimationFrame(main);
-};
+	//did they win?
+	
+	timer -= delta/1000;
+	ctx.fillText("Timer: " + Math.round(timer), 384, 32);
+	if(timer <= 0) {
+		if (monstersCaught >= 10) {	
+			ctx.fillText("You Won!", 200, 220);
+		} else {
+			ctx.fillText("You Lost!", 200, 220);
+		}
+		return 0
+	}
 
-// Cross-browser support for requestAnimationFrame
-var w = window;
-requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+	// Request to do this again ASAP
+	
+	window.requestAnimationFrame(main);
+};
 
 // Let's play this game!
 var then = Date.now();
+var timer = 10;
 reset();
 main();
