@@ -132,7 +132,6 @@ var main = function () {
 	}
 
 	// Request to do this again ASAP
-	
 	window.requestAnimationFrame(main);
 };
 
